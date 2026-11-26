@@ -1,0 +1,582 @@
+[
+  {
+    "epoch": 0,
+    "seconds": 214.3,
+    "train_loss_cls": 0.7553,
+    "train_loss_reg": 0.8099,
+    "train_loss_ctr": 1.4329,
+    "train_loss": 2.998,
+    "val_mAP@0.5": 0.0063,
+    "val_mAP@0.75": 0.0,
+    "per_class_ap": {
+      "car": 0.0092,
+      "motorcycle": 0.0004,
+      "pedestrian": 0.0
+    },
+    "per_class_recall": {
+      "car": 0.0261,
+      "motorcycle": 0.0052,
+      "pedestrian": 0.0039
+    }
+  },
+  {
+    "epoch": 1,
+    "seconds": 200.6,
+    "train_loss_cls": 0.4606,
+    "train_loss_reg": 0.7438,
+    "train_loss_ctr": 1.0238,
+    "train_loss": 2.2282,
+    "val_mAP@0.5": 0.0317,
+    "val_mAP@0.75": 0.0022,
+    "per_class_ap": {
+      "car": 0.0394,
+      "motorcycle": 0.0054,
+      "pedestrian": 0.0062
+    },
+    "per_class_recall": {
+      "car": 0.0688,
+      "motorcycle": 0.0996,
+      "pedestrian": 0.0747
+    }
+  },
+  {
+    "epoch": 2,
+    "seconds": 220.0,
+    "train_loss_cls": 0.3773,
+    "train_loss_reg": 0.7032,
+    "train_loss_ctr": 0.9069,
+    "train_loss": 1.9873,
+    "val_mAP@0.5": 0.0543,
+    "val_mAP@0.75": 0.001,
+    "per_class_ap": {
+      "car": 0.0485,
+      "motorcycle": 0.0161,
+      "pedestrian": 0.0182
+    },
+    "per_class_recall": {
+      "car": 0.1801,
+      "motorcycle": 0.146,
+      "pedestrian": 0.1151
+    }
+  },
+  {
+    "epoch": 3,
+    "seconds": 224.4,
+    "train_loss_cls": 0.3399,
+    "train_loss_reg": 0.6809,
+    "train_loss_ctr": 0.8516,
+    "train_loss": 1.8723,
+    "val_mAP@0.5": 0.0883,
+    "val_mAP@0.75": 0.004,
+    "per_class_ap": {
+      "car": 0.0804,
+      "motorcycle": 0.044,
+      "pedestrian": 0.0141
+    },
+    "per_class_recall": {
+      "car": 0.1766,
+      "motorcycle": 0.1317,
+      "pedestrian": 0.0907
+    }
+  },
+  {
+    "epoch": 4,
+    "seconds": 222.0,
+    "train_loss_cls": 0.3108,
+    "train_loss_reg": 0.6665,
+    "train_loss_ctr": 0.8165,
+    "train_loss": 1.7937,
+    "val_mAP@0.5": 0.1311,
+    "val_mAP@0.75": 0.022,
+    "per_class_ap": {
+      "car": 0.1337,
+      "motorcycle": 0.0726,
+      "pedestrian": 0.0234
+    },
+    "per_class_recall": {
+      "car": 0.2275,
+      "motorcycle": 0.1798,
+      "pedestrian": 0.0904
+    }
+  },
+  {
+    "epoch": 5,
+    "seconds": 222.0,
+    "train_loss_cls": 0.283,
+    "train_loss_reg": 0.6482,
+    "train_loss_ctr": 0.7771,
+    "train_loss": 1.7084,
+    "val_mAP@0.5": 0.1401,
+    "val_mAP@0.75": 0.0153,
+    "per_class_ap": {
+      "car": 0.1344,
+      "motorcycle": 0.0599,
+      "pedestrian": 0.0387
+    },
+    "per_class_recall": {
+      "car": 0.2321,
+      "motorcycle": 0.1988,
+      "pedestrian": 0.1012
+    }
+  },
+  {
+    "epoch": 6,
+    "seconds": 208.6,
+    "train_loss_cls": 0.258,
+    "train_loss_reg": 0.6307,
+    "train_loss_ctr": 0.7429,
+    "train_loss": 1.6316,
+    "val_mAP@0.5": 0.1215,
+    "val_mAP@0.75": 0.0277,
+    "per_class_ap": {
+      "car": 0.1381,
+      "motorcycle": 0.0654,
+      "pedestrian": 0.0202
+    },
+    "per_class_recall": {
+      "car": 0.2136,
+      "motorcycle": 0.1604,
+      "pedestrian": 0.1058
+    }
+  },
+  {
+    "epoch": 7,
+    "seconds": 217.5,
+    "train_loss_cls": 0.2474,
+    "train_loss_reg": 0.6212,
+    "train_loss_ctr": 0.7296,
+    "train_loss": 1.5981,
+    "val_mAP@0.5": 0.1193,
+    "val_mAP@0.75": 0.0234,
+    "per_class_ap": {
+      "car": 0.1343,
+      "motorcycle": 0.0626,
+      "pedestrian": 0.0172
+    },
+    "per_class_recall": {
+      "car": 0.2042,
+      "motorcycle": 0.1782,
+      "pedestrian": 0.0824
+    }
+  },
+  {
+    "epoch": 8,
+    "seconds": 231.5,
+    "train_loss_cls": 0.2366,
+    "train_loss_reg": 0.6136,
+    "train_loss_ctr": 0.7118,
+    "train_loss": 1.5621,
+    "val_mAP@0.5": 0.1739,
+    "val_mAP@0.75": 0.0218,
+    "per_class_ap": {
+      "car": 0.1308,
+      "motorcycle": 0.091,
+      "pedestrian": 0.0717
+    },
+    "per_class_recall": {
+      "car": 0.2238,
+      "motorcycle": 0.2231,
+      "pedestrian": 0.1654
+    }
+  },
+  {
+    "epoch": 9,
+    "seconds": 217.4,
+    "train_loss_cls": 0.2253,
+    "train_loss_reg": 0.6027,
+    "train_loss_ctr": 0.6942,
+    "train_loss": 1.5222,
+    "val_mAP@0.5": 0.1465,
+    "val_mAP@0.75": 0.0423,
+    "per_class_ap": {
+      "car": 0.1608,
+      "motorcycle": 0.0836,
+      "pedestrian": 0.0387
+    },
+    "per_class_recall": {
+      "car": 0.2406,
+      "motorcycle": 0.1726,
+      "pedestrian": 0.1488
+    }
+  },
+  {
+    "epoch": 10,
+    "seconds": 219.7,
+    "train_loss_cls": 0.2202,
+    "train_loss_reg": 0.5977,
+    "train_loss_ctr": 0.6891,
+    "train_loss": 1.507,
+    "val_mAP@0.5": 0.1838,
+    "val_mAP@0.75": 0.0335,
+    "per_class_ap": {
+      "car": 0.1688,
+      "motorcycle": 0.0932,
+      "pedestrian": 0.0638
+    },
+    "per_class_recall": {
+      "car": 0.2551,
+      "motorcycle": 0.1993,
+      "pedestrian": 0.1517
+    }
+  },
+  {
+    "epoch": 11,
+    "seconds": 224.3,
+    "train_loss_cls": 0.21,
+    "train_loss_reg": 0.5879,
+    "train_loss_ctr": 0.6752,
+    "train_loss": 1.4731,
+    "val_mAP@0.5": 0.1418,
+    "val_mAP@0.75": 0.0183,
+    "per_class_ap": {
+      "car": 0.1244,
+      "motorcycle": 0.0549,
+      "pedestrian": 0.0609
+    },
+    "per_class_recall": {
+      "car": 0.1984,
+      "motorcycle": 0.1105,
+      "pedestrian": 0.1123
+    }
+  },
+  {
+    "epoch": 12,
+    "seconds": 192.3,
+    "train_loss_cls": 0.2007,
+    "train_loss_reg": 0.5781,
+    "train_loss_ctr": 0.6637,
+    "train_loss": 1.4425,
+    "val_mAP@0.5": 0.1691,
+    "val_mAP@0.75": 0.0348,
+    "per_class_ap": {
+      "car": 0.1592,
+      "motorcycle": 0.0818,
+      "pedestrian": 0.0649
+    },
+    "per_class_recall": {
+      "car": 0.2388,
+      "motorcycle": 0.2152,
+      "pedestrian": 0.165
+    }
+  },
+  {
+    "epoch": 13,
+    "seconds": 211.5,
+    "train_loss_cls": 0.1957,
+    "train_loss_reg": 0.5722,
+    "train_loss_ctr": 0.6563,
+    "train_loss": 1.4243,
+    "val_mAP@0.5": 0.1326,
+    "val_mAP@0.75": 0.0402,
+    "per_class_ap": {
+      "car": 0.1642,
+      "motorcycle": 0.0712,
+      "pedestrian": 0.0239
+    },
+    "per_class_recall": {
+      "car": 0.2534,
+      "motorcycle": 0.1523,
+      "pedestrian": 0.0553
+    }
+  },
+  {
+    "epoch": 14,
+    "seconds": 183.8,
+    "train_loss_cls": 0.1963,
+    "train_loss_reg": 0.5723,
+    "train_loss_ctr": 0.6559,
+    "train_loss": 1.4245,
+    "val_mAP@0.5": 0.1669,
+    "val_mAP@0.75": 0.0486,
+    "per_class_ap": {
+      "car": 0.1831,
+      "motorcycle": 0.1079,
+      "pedestrian": 0.0324
+    },
+    "per_class_recall": {
+      "car": 0.2627,
+      "motorcycle": 0.2327,
+      "pedestrian": 0.1322
+    }
+  },
+  {
+    "epoch": 15,
+    "seconds": 184.7,
+    "train_loss_cls": 0.191,
+    "train_loss_reg": 0.567,
+    "train_loss_ctr": 0.6495,
+    "train_loss": 1.4075,
+    "val_mAP@0.5": 0.1868,
+    "val_mAP@0.75": 0.0254,
+    "per_class_ap": {
+      "car": 0.1569,
+      "motorcycle": 0.0876,
+      "pedestrian": 0.0736
+    },
+    "per_class_recall": {
+      "car": 0.2505,
+      "motorcycle": 0.208,
+      "pedestrian": 0.1589
+    }
+  },
+  {
+    "epoch": 16,
+    "seconds": 189.1,
+    "train_loss_cls": 0.184,
+    "train_loss_reg": 0.5592,
+    "train_loss_ctr": 0.6398,
+    "train_loss": 1.383,
+    "val_mAP@0.5": 0.1817,
+    "val_mAP@0.75": 0.0352,
+    "per_class_ap": {
+      "car": 0.1574,
+      "motorcycle": 0.1038,
+      "pedestrian": 0.0642
+    },
+    "per_class_recall": {
+      "car": 0.2556,
+      "motorcycle": 0.2394,
+      "pedestrian": 0.1609
+    }
+  },
+  {
+    "epoch": 17,
+    "seconds": 185.3,
+    "train_loss_cls": 0.1801,
+    "train_loss_reg": 0.5544,
+    "train_loss_ctr": 0.6355,
+    "train_loss": 1.37,
+    "val_mAP@0.5": 0.2121,
+    "val_mAP@0.75": 0.0478,
+    "per_class_ap": {
+      "car": 0.1838,
+      "motorcycle": 0.116,
+      "pedestrian": 0.09
+    },
+    "per_class_recall": {
+      "car": 0.2872,
+      "motorcycle": 0.2208,
+      "pedestrian": 0.2036
+    }
+  },
+  {
+    "epoch": 18,
+    "seconds": 186.7,
+    "train_loss_cls": 0.1776,
+    "train_loss_reg": 0.5517,
+    "train_loss_ctr": 0.6291,
+    "train_loss": 1.3584,
+    "val_mAP@0.5": 0.1896,
+    "val_mAP@0.75": 0.0436,
+    "per_class_ap": {
+      "car": 0.1694,
+      "motorcycle": 0.1174,
+      "pedestrian": 0.0631
+    },
+    "per_class_recall": {
+      "car": 0.2586,
+      "motorcycle": 0.2327,
+      "pedestrian": 0.1365
+    }
+  },
+  {
+    "epoch": 19,
+    "seconds": 175.6,
+    "train_loss_cls": 0.1692,
+    "train_loss_reg": 0.5431,
+    "train_loss_ctr": 0.617,
+    "train_loss": 1.3293,
+    "val_mAP@0.5": 0.1675,
+    "val_mAP@0.75": 0.0491,
+    "per_class_ap": {
+      "car": 0.1867,
+      "motorcycle": 0.0989,
+      "pedestrian": 0.0394
+    },
+    "per_class_recall": {
+      "car": 0.2782,
+      "motorcycle": 0.2016,
+      "pedestrian": 0.1223
+    }
+  },
+  {
+    "epoch": 20,
+    "seconds": 194.6,
+    "train_loss_cls": 0.1644,
+    "train_loss_reg": 0.5382,
+    "train_loss_ctr": 0.6126,
+    "train_loss": 1.3152,
+    "val_mAP@0.5": 0.1942,
+    "val_mAP@0.75": 0.0432,
+    "per_class_ap": {
+      "car": 0.1706,
+      "motorcycle": 0.1139,
+      "pedestrian": 0.0715
+    },
+    "per_class_recall": {
+      "car": 0.2594,
+      "motorcycle": 0.2416,
+      "pedestrian": 0.1512
+    }
+  },
+  {
+    "epoch": 21,
+    "seconds": 208.7,
+    "train_loss_cls": 0.1622,
+    "train_loss_reg": 0.534,
+    "train_loss_ctr": 0.6054,
+    "train_loss": 1.3016,
+    "val_mAP@0.5": 0.2013,
+    "val_mAP@0.75": 0.0456,
+    "per_class_ap": {
+      "car": 0.1759,
+      "motorcycle": 0.1195,
+      "pedestrian": 0.075
+    },
+    "per_class_recall": {
+      "car": 0.2503,
+      "motorcycle": 0.2414,
+      "pedestrian": 0.1635
+    }
+  },
+  {
+    "epoch": 22,
+    "seconds": 197.6,
+    "train_loss_cls": 0.1588,
+    "train_loss_reg": 0.5313,
+    "train_loss_ctr": 0.6049,
+    "train_loss": 1.295,
+    "val_mAP@0.5": 0.1954,
+    "val_mAP@0.75": 0.0488,
+    "per_class_ap": {
+      "car": 0.1785,
+      "motorcycle": 0.1236,
+      "pedestrian": 0.0642
+    },
+    "per_class_recall": {
+      "car": 0.26,
+      "motorcycle": 0.2619,
+      "pedestrian": 0.1409
+    }
+  },
+  {
+    "epoch": 23,
+    "seconds": 200.2,
+    "train_loss_cls": 0.162,
+    "train_loss_reg": 0.5332,
+    "train_loss_ctr": 0.6063,
+    "train_loss": 1.3015,
+    "val_mAP@0.5": 0.1974,
+    "val_mAP@0.75": 0.047,
+    "per_class_ap": {
+      "car": 0.1766,
+      "motorcycle": 0.1191,
+      "pedestrian": 0.071
+    },
+    "per_class_recall": {
+      "car": 0.2612,
+      "motorcycle": 0.2415,
+      "pedestrian": 0.1502
+    }
+  },
+  {
+    "epoch": 24,
+    "seconds": 214.5,
+    "train_loss_cls": 0.1557,
+    "train_loss_reg": 0.5243,
+    "train_loss_ctr": 0.5984,
+    "train_loss": 1.2785,
+    "val_mAP@0.5": 0.2051,
+    "val_mAP@0.75": 0.0511,
+    "per_class_ap": {
+      "car": 0.1842,
+      "motorcycle": 0.1277,
+      "pedestrian": 0.0724
+    },
+    "per_class_recall": {
+      "car": 0.2716,
+      "motorcycle": 0.2634,
+      "pedestrian": 0.1459
+    }
+  },
+  {
+    "epoch": 25,
+    "seconds": 239.5,
+    "train_loss_cls": 0.156,
+    "train_loss_reg": 0.5263,
+    "train_loss_ctr": 0.6001,
+    "train_loss": 1.2824,
+    "val_mAP@0.5": 0.2049,
+    "val_mAP@0.75": 0.0513,
+    "per_class_ap": {
+      "car": 0.183,
+      "motorcycle": 0.1209,
+      "pedestrian": 0.0803
+    },
+    "per_class_recall": {
+      "car": 0.2706,
+      "motorcycle": 0.2627,
+      "pedestrian": 0.1792
+    }
+  },
+  {
+    "epoch": 26,
+    "seconds": 214.6,
+    "train_loss_cls": 0.1506,
+    "train_loss_reg": 0.5207,
+    "train_loss_ctr": 0.5942,
+    "train_loss": 1.2655,
+    "val_mAP@0.5": 0.2012,
+    "val_mAP@0.75": 0.0394,
+    "per_class_ap": {
+      "car": 0.1695,
+      "motorcycle": 0.1138,
+      "pedestrian": 0.0776
+    },
+    "per_class_recall": {
+      "car": 0.2589,
+      "motorcycle": 0.2435,
+      "pedestrian": 0.1852
+    }
+  },
+  {
+    "epoch": 27,
+    "seconds": 213.7,
+    "train_loss_cls": 0.1442,
+    "train_loss_reg": 0.5151,
+    "train_loss_ctr": 0.585,
+    "train_loss": 1.2442,
+    "val_mAP@0.5": 0.2057,
+    "val_mAP@0.75": 0.0541,
+    "per_class_ap": {
+      "car": 0.1906,
+      "motorcycle": 0.1251,
+      "pedestrian": 0.074
+    },
+    "per_class_recall": {
+      "car": 0.2768,
+      "motorcycle": 0.2565,
+      "pedestrian": 0.1587
+    }
+  },
+  {
+    "epoch": 28,
+    "seconds": 221.5,
+    "train_loss_cls": 0.141,
+    "train_loss_reg": 0.5113,
+    "train_loss_ctr": 0.5808,
+    "train_loss": 1.2331,
+    "val_mAP@0.5": 0.1943,
+    "val_mAP@0.75": 0.0509,
+    "per_class_ap": {
+      "car": 0.1805,
+      "motorcycle": 0.1265,
+      "pedestrian": 0.0608
+    },
+    "per_class_recall": {
+      "car": 0.2708,
+      "motorcycle": 0.2513,
+      "pedestrian": 0.1325
+    }
+  }
+]

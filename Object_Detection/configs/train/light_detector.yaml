@@ -1,0 +1,36 @@
+# 自建轻量事件检测器（检测 + 识别三分类同训）
+# 对应技术方案 §4.2/§4.4 的超参口径，模型换成 §7.1 路线 A 的自建实现。
+# 用法：python scripts/10_train.py --config configs/train/light_detector.yaml
+
+experiment_name: light_detector_v1
+seed: 42
+
+data:
+  split_file: data/splits/train.txt
+  val_split_file: data/splits/val.txt
+  grid_width: 640
+  grid_height: 360
+  num_time_channels: 9
+  class_names: [car, motorcycle, pedestrian]
+  # 新类摩托车 / 难点行人加权（方案 §4.4）
+  class_weights: [1.0, 1.5, 2.0]
+
+model:
+  width: 64          # backbone 宽度（数据量小，模型刻意做小）
+
+train:
+  optimizer: adamw
+  lr: 2.0e-4
+  weight_decay: 1.0e-4
+  # 方案 §4.4 给的是 16，但本机 RTX 3070 (8GB) 常被其他任务占用，
+  # 留 1.5 GB 时 batch 16 会 OOM，先按 8 起步；显存空出来可调回 16。
+  batch_size: 8
+  epochs: 50
+  lr_scheduler: cosine
+  workers: 8
+  force_cpu: false
+  augment:
+    temporal_jitter_ratio: 0.1     # 时间轴 ±10%
+    event_drop_ratio: [0.1, 0.3]  # 随机丢事件，模拟低对比度
+    noise_scale: 1.0              # 背景活动噪声注入强度（消融开关）
+    geometry: [hflip, translate, scale]   # 几何增强对所有时间通道一致施加

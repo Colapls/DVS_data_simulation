@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DVS 自动采集 / 自动标注控制台</title>
+<style>
+  :root {
+    --bg: #101418; --panel: #1a2027; --line: #2a323c; --text: #d8dee6;
+    --dim: #8a95a3; --accent: #4da3ff; --ok: #51cf66; --warn: #ffd43b;
+    --err: #ff6b6b; --mono: Consolas, "Courier New", monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 14px/1.6 "Segoe UI", "Microsoft YaHei", sans-serif; }
+  header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+           padding: 12px 20px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 17px; margin: 0 16px 0 0; }
+  main { max-width: 1280px; margin: 0 auto; padding: 16px 20px 60px; }
+  section { background: var(--panel); border: 1px solid var(--line);
+            border-radius: 10px; padding: 16px 18px; margin-bottom: 18px; }
+  h2 { font-size: 15px; margin: 0 0 12px; color: var(--accent); }
+  .hint { color: var(--dim); font-size: 12.5px; margin: 4px 0 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-bottom: 10px; }
+  label.field { display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; color: var(--dim); }
+  label.field > * { color: var(--text); }
+  input, select { background: #0d1117; border: 1px solid var(--line); color: var(--text);
+                  border-radius: 6px; padding: 6px 8px; font-size: 13px; }
+  input[type=number] { width: 92px; }
+  button { background: #26303a; color: var(--text); border: 1px solid var(--line);
+           border-radius: 6px; padding: 7px 16px; font-size: 13.5px; cursor: pointer; }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button.primary { background: #1c4a78; border-color: #2e6db4; }
+  button.danger { background: #6b2430; border-color: #a34252; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--err); display: inline-block; }
+  .dot.up { background: var(--ok); }
+  #carla-text { color: var(--dim); font-size: 13px; }
+  .badge { font-size: 12px; padding: 2px 10px; border-radius: 10px; border: 1px solid var(--line); }
+  .badge.running { color: var(--warn); border-color: var(--warn); }
+  .badge.done { color: var(--ok); border-color: var(--ok); }
+  .badge.failed, .badge.stopped { color: var(--err); border-color: var(--err); }
+  .badge.idle { color: var(--dim); }
+  .progress { height: 14px; background: #0d1117; border: 1px solid var(--line);
+              border-radius: 7px; overflow: hidden; margin: 10px 0 4px; }
+  .progress > div { height: 100%; width: 0; background: linear-gradient(90deg,#2e6db4,#4da3ff);
+                    transition: width .4s; }
+  #progress-text { font-size: 12.5px; color: var(--dim); }
+  .log { background: #0a0e12; border: 1px solid var(--line); border-radius: 8px;
+         padding: 10px 12px; height: 260px; overflow-y: auto;
+         font: 12px/1.55 var(--mono); white-space: pre-wrap; word-break: break-all; }
+  .log .cmd { color: #6db3f2; }
+  .log .ok { color: var(--ok); }
+  .log .error { color: var(--err); }
+  .log .warn { color: var(--warn); }
+  .log .success { color: var(--ok); }
+  .viewer { display: flex; gap: 16px; flex-wrap: wrap; }
+  .panel { flex: 1 1 420px; min-width: 320px; }
+  .panel .title { font-size: 12.5px; color: var(--dim); margin-bottom: 6px; }
+  canvas { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #000; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; font-size: 12.5px; }
+  .legend span::before { content: "■ "; }
+  .legend .c-car::before { color: #ffa94d; } .legend .c-moto::before { color: #f04fe0; }
+  .legend .c-ped::before { color: #51cf66; } .legend .c-ign::before { color: #7a828c; }
+  #counts { font-size: 12.5px; color: var(--dim); margin-top: 6px; }
+  #toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
+           background: #3a2630; color: #ffd7dd; border: 1px solid #a34252;
+           padding: 8px 18px; border-radius: 8px; display: none; font-size: 13px; z-index: 9; }
+  #frame-slider { flex: 1 1 260px; }
+  #logpanel { position: fixed; top: 0; right: 0; height: 100vh; width: 480px; max-width: 92vw;
+              background: var(--panel); border-left: 1px solid var(--line);
+              transform: translateX(100%); transition: transform .25s ease; z-index: 5;
+              display: flex; flex-direction: column; padding: 12px 14px; box-shadow: -8px 0 24px rgba(0,0,0,.45); }
+  #logpanel.open { transform: translateX(0); }
+  .lp-head { display: flex; justify-content: space-between; align-items: center;
+             margin-bottom: 8px; font-size: 13px; color: var(--dim); }
+  #logpanel .log { flex: 1; height: auto; }
+  .log .carla { color: #b197fc; }
+  .log .app { color: #66d9e8; }
+  #btn-logpanel.active { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <h1>DVS 自动采集 / 自动标注控制台</h1>
+  <span class="dot" id="carla-dot"></span>
+  <span id="carla-text">CARLA 检测中…</span>
+  <button id="btn-carla">启动 CARLA</button>
+  <label style="font-size:12.5px;color:var(--dim)">
+    <input type="checkbox" id="carla-offscreen"> 无窗口
+  </label>
+  <span style="flex:1"></span>
+  <button id="btn-logpanel">实时日志</button>
+  <span class="badge idle" id="job-badge">空闲</span>
+</header>
+
+<main>
+  <section>
+    <h2>① 数据采集（采集时自动标注 车辆 / 行人 / 摩托车）</h2>
+    <p class="hint">标注在采集时同步生成，无需单独跑标注；同一时刻只能跑一个任务。</p>
+    <div class="row">
+      <label class="field">机位组
+        <select id="rig" style="min-width:280px"></select>
+      </label>
+      <label class="field">帧数 <input type="number" id="frames" value="200" min="1"></label>
+      <label class="field">车辆数 <input type="number" id="vehicles" value="80" min="0"></label>
+      <label class="field">行人数 <input type="number" id="walkers" value="40" min="0"></label>
+      <label class="field">天气
+        <select id="weather">
+          <option value="">自动（按缺口均衡）</option>
+          <option value="ClearNoon">晴天正午</option>
+          <option value="CloudyNoon">多云正午</option>
+          <option value="SoftRainSunset">小雨日落</option>
+          <option value="WetSunset">湿地日落</option>
+          <option value="ClearNight">晴夜</option>
+          <option value="HardRainNight">大雨夜</option>
+        </select>
+      </label>
+      <label class="field">相机数(空=全部) <input type="number" id="cameras" min="1" placeholder="全部"></label>
+      <label class="field">输出目录 <input type="text" id="output" value="dvs_roadside_multicam" style="width:210px"></label>
+      <label style="font-size:12.5px;color:var(--dim)">
+        <input type="checkbox" id="load-town" checked> 自动切换地图
+      </label>
+    </div>
+    <div class="row">
+      <label class="field">最小可探测短边(px) <input type="number" id="min-detect-px" value="16" min="1"></label>
+      <label class="field">最大标注距离(m) <input type="number" id="max-detect-distance" value="120" min="1"></label>
+      <span class="hint" style="align-self:center">太远、在画面上只有几个像素的目标会被标为 ignore，不进训练标签</span>
+    </div>
+    <div class="row">
+      <button class="primary" id="btn-collect">▶ 开始采集</button>
+      <button class="danger" id="btn-stop" disabled>■ 终止任务</button>
+      <button id="btn-refresh-seq">刷新序列列表</button>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <div id="progress-text">尚未开始</div>
+  </section>
+
+  <section>
+    <h2>② 标注后处理与质检</h2>
+    <div class="row">
+      <button id="btn-stats">事件统计（写回 low_event / static 质量标记）</button>
+      <button id="btn-check">结构与标注质检</button>
+      <button id="btn-reproject" disabled>重算当前序列标注（离线投影）</button>
+    </div>
+    <p class="hint">对「输出目录」整个数据集执行；任务输出在下方日志，完整后台日志（含 CARLA）见右上角「实时日志」面板。质检有 1 条历史 ERROR 属已知问题（sequence_000001/cam_02 时间戳）。</p>
+    <div class="log" id="log"></div>
+  </section>
+
+  <section>
+    <h2>③ 数据集划分与模型训练（检测 + 识别三分类）</h2>
+    <p class="hint">链路：切片（事件→体素网格）→ 划分（按序列，防泄漏）→ 训练 → 评估。任务串行执行，输出见日志面板。训练/评估用 dvs 环境（<span id="detect-python" style="font-family:monospace"></span>）。</p>
+
+    <div class="row">
+      <button class="primary" id="btn-slice">① 事件切片（体素化）</button>
+      <button id="btn-refresh-slices">刷新序列</button>
+      <span class="hint" style="align-self:center">已切过的序列自动跳过；新增采集后重跑即可增量切</span>
+    </div>
+
+    <div class="row" style="flex-wrap:wrap">
+      <label class="field">划分比例 train/val/test %
+        <input type="text" id="split-ratios" value="70,15,15" style="width:110px">
+      </label>
+      <label class="field">随机种子 <input type="number" id="split-seed" value="0" style="width:70px"></label>
+      <label style="font-size:12.5px;color:var(--dim);align-self:center">
+        <input type="checkbox" id="split-keep-noped"> 保留无行人序列
+      </label>
+      <button class="primary" id="btn-split">② 生成划分</button>
+    </div>
+    <div class="row" style="flex-wrap:wrap;max-height:110px;overflow:auto;border:1px solid var(--border);border-radius:6px;padding:6px" id="seq-checkboxes">
+      <span class="hint">点「刷新序列」载入切片清单（默认全选；不选=全部）</span>
+    </div>
+    <div id="split-state" class="hint" style="margin-top:6px"></div>
+
+    <div class="row" style="margin-top:10px">
+      <label class="field">轮数 <input type="number" id="train-epochs" value="40" style="width:70px"></label>
+      <label class="field">批大小 <input type="number" id="train-batch" value="8" style="width:70px"></label>
+      <label class="field">学习率 <input type="text" id="train-lr" value="0.0005" style="width:90px"></label>
+      <label class="field">实验名 <input type="text" id="train-exp" value="light_detector_v1" style="width:160px"></label>
+      <button class="primary" id="btn-train">③ 开始训练</button>
+      <button id="btn-resume-train">续训</button>
+    </div>
+    <div class="row">
+      <label class="field">评估集
+        <select id="eval-split"><option>val</option><option>test</option></select>
+      </label>
+      <button class="primary" id="btn-evaluate">④ 评估（mAP + 每类召回）</button>
+      <span class="hint" style="align-self:center">评估读该实验的 best.pth</span>
+    </div>
+    <div id="train-summary" style="margin-top:8px"></div>
+    <div id="eval-summary" style="margin-top:6px"></div>
+  </section>
+
+  <section>
+    <h2>④ 数据浏览与标注预览</h2>
+    <div class="row">
+      <label class="field">序列 <select id="seq"></select></label>
+      <label class="field">机位 <select id="cam"></select></label>
+      <button id="btn-prev">◀</button>
+      <input type="range" id="frame-slider" min="0" max="0" value="0">
+      <button id="btn-next">▶</button>
+      <span id="frame-label" style="font-size:12.5px;color:var(--dim)"></span>
+    </div>
+    <div class="viewer">
+      <div class="panel">
+        <div class="title">同步 RGB + 自动标注框</div>
+        <canvas id="viewer-rgb"></canvas>
+        <div class="legend">
+          <span class="c-car">车辆</span><span class="c-moto">摩托车</span>
+          <span class="c-ped">行人</span><span class="c-ign">忽略/困难(灰)</span>
+        </div>
+        <div id="counts"></div>
+      </div>
+      <div class="panel">
+        <div class="title">该帧窗口内的事件（ON=红 OFF=蓝）</div>
+        <canvas id="viewer-events"></canvas>
+        <div id="counts-events" style="font-size:12.5px;color:var(--dim);margin-top:8px"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<aside id="logpanel">
+  <div class="lp-head">
+    <span>实时日志（采集任务 + CARLA + 控制台）</span>
+    <button id="btn-log-clear">清空显示</button>
+  </div>
+  <div class="log" id="log-all"></div>
+</aside>
+<div id="toast"></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const state = { lastSeq: 0, action: "", status: "idle", hasSnapshot: false, labels: null };
+
+// ---------- SSE：任务日志 + 状态 ----------
+function connectEvents() {
+  const es = new EventSource("/api/events?since=0");
+  es.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.kind === "status") { onStatus(m); return; }
+    if (m.seq <= state.lastSeq) return;      // 重连后按 seq 去重
+    state.lastSeq = m.seq;
+    appendLog(m);
+    parseProgress(m.text || "");
+  };
+}
+
+function onStatus(m) {
+  if (m.action !== state.action && m.action) {   // 新任务开始：清空日志与进度
+    $("log").textContent = "";
+    setProgress(0, 0, "");
+    $("logpanel").classList.add("open");          // 任务开始自动展开右侧日志
+    $("btn-logpanel").classList.add("active");
+  }
+  state.action = m.action || "";
+  state.status = m.status;
+  const badge = $("job-badge");
+  const names = { idle: "空闲", running: "运行中", done: "已完成", failed: "失败", stopped: "已终止" };
+  badge.textContent = names[m.status] || m.status;
+  badge.className = "badge " + m.status;
+  const busy = m.status === "running";
+  for (const id of ["btn-collect", "btn-stats", "btn-check", "btn-reproject",
+                    "btn-slice", "btn-split", "btn-train", "btn-evaluate"]) $(id).disabled = busy;
+  $("btn-stop").disabled = !busy;
+  if (m.status === "done" || m.status === "stopped") loadSequences();
+}
+
+function makeLine(m) {
+  const div = document.createElement("div");
+  let cls = m.kind;
+  let text = m.text || "";
+  if (m.kind === "carla") text = "[CARLA] " + text;
+  else if (m.kind === "app") text = "[控制台] " + text;
+  else if (text.startsWith("WARNING")) cls = "warn";
+  else if (text.startsWith("ERROR")) cls = "error";
+  else if (text.startsWith("[OK]")) cls = "success";
+  div.className = cls;
+  div.textContent = text;
+  return div;
+}
+
+function appendTo(container, line) {
+  const atBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 40;
+  container.appendChild(line);
+  while (container.childElementCount > 1000) container.removeChild(container.firstChild);
+  if (atBottom) container.scrollTop = container.scrollHeight;
+}
+
+function appendLog(m) {
+  // carla/控制台 的后台日志只进右侧面板；任务输出两处都进。
+  if (m.kind !== "carla" && m.kind !== "app") appendTo($("log"), makeLine(m));
+  appendTo($("log-all"), makeLine(m));
+}
+
+function setProgress(cur, total, extra) {
+  const pct = total > 0 ? Math.min(100, (cur / total) * 100) : 0;
+  $("bar").style.width = pct + "%";
+  $("progress-text").textContent = total > 0
+    ? `采集进度 ${cur} / ${total} 帧（${pct.toFixed(1)}%）${extra || ""}` : (extra || "");
+}
+
+function parseProgress(text) {
+  const m = text.match(/采集进度\s*(\d+)\s*\/\s*(\d+)\s*帧/);
+  if (m) setProgress(+m[1], +m[2], "");
+}
+
+// ---------- CARLA ----------
+async function pollCarla() {
+  const dot = $("carla-dot"), text = $("carla-text");
+  try {
+    const s = await (await fetch("/api/carla/status")).json();
+    if (s.up) {
+      dot.className = "dot up";
+      const map = s.map ? " · " + s.map.split("/").pop() : "";
+      text.textContent = `CARLA 在线 · :${s.port}${map}`;
+    } else {
+      dot.className = "dot";
+      text.textContent = "CARLA 未运行";
+    }
+  } catch {
+    // fetch 本身失败 = 控制台进程不在了，和「CARLA 未运行」是两回事。
+    dot.className = "dot";
+    text.textContent = "控制台连接断开 — 请确认 webui.py 仍在运行";
+  }
+}
+$("btn-carla").onclick = async () => {
+  // 已在运行就不重复启动（多实例会抢端口、抢地图）。
+  try {
+    const s = await (await fetch("/api/carla/status")).json();
+    if (s.up) { toast(`CARLA 已在线（端口 ${s.port}），无需重复启动`); return; }
+  } catch { /* 状态拿不到就照常尝试启动 */ }
+  toast("正在启动 CARLA，首次加载地图可能需要 20–60 秒…");
+  const r = await fetch("/api/carla/start", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ port: 2000, offscreen: $("carla-offscreen").checked }),
+  });
+  const d = await r.json();
+  if (!d.ok) toast(d.error);
+};
+
+// ---------- 采集 / 后处理按钮 ----------
+function post(url, body) {
+  return fetch(url, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body || {}),
+  }).then(r => r.json()).then(d => { if (d.error) toast(d.error); return d; });
+}
+
+function datasetDir() { return $("output").value.trim() || "dvs_roadside_multicam"; }
+
+$("btn-collect").onclick = () => post("/api/collect", {
+  rig: $("rig").value, frames: +$("frames").value || 200,
+  vehicles: +$("vehicles").value, walkers: +$("walkers").value,
+  weather: $("weather").value || null,
+  cameras: $("cameras").value ? +$("cameras").value : null,
+  min_detect_px: +$("min-detect-px").value || null,
+  max_detect_distance: +$("max-detect-distance").value || null,
+  dataset: datasetDir(), load_town: $("load-town").checked,
+});
+$("btn-stop").onclick = () => post("/api/stop");
+$("btn-stats").onclick = () => post("/api/stats", { dataset: datasetDir() });
+$("btn-check").onclick = () => post("/api/check", { dataset: datasetDir() });
+$("btn-refresh-seq").onclick = () => loadSequences();
+$("btn-reproject").onclick = () => {
+  if ($("seq").value) post("/api/project", {
+    dataset: datasetDir(), sequence: $("seq").value,
+    min_detect_px: +$("min-detect-px").value || null,
+    max_detect_distance: +$("max-detect-distance").value || null,
+  });
+};
+
+// ---------- 检测链路：切片 / 划分 / 训练 / 评估 ----------
+const SEQ_STORE = "dvs.detect.sequences";
+
+function seqChecked() {
+  return Array.from($("seq-checkboxes").querySelectorAll("input:checked")).map(i => i.value);
+}
+
+async function loadDetectSequences() {
+  const d = await (await fetch("/api/detect/sequences")).json();
+  $("detect-python").textContent = d.python || "";
+  const list = d.sequences || [];
+  let stored = [];
+  try { stored = JSON.parse(localStorage.getItem(SEQ_STORE) || "[]"); } catch { stored = []; }
+  const keep = new Set(stored.length ? stored : list.map(s => s.id));
+  $("seq-checkboxes").innerHTML = list.map(s =>
+    `<label style="font-size:12.5px;margin-right:12px;white-space:nowrap">
+       <input type="checkbox" value="${s.id}" ${keep.has(s.id) ? "checked" : ""}> ${s.id}（${s.windows}窗）
+     </label>`).join("") || '<span class="hint">还没有切片产物——先跑「① 事件切片」</span>';
+  $("seq-checkboxes").querySelectorAll("input").forEach(el => {
+    el.onchange = () => localStorage.setItem(SEQ_STORE, JSON.stringify(seqChecked()));
+  });
+}
+
+async function loadSplitState() {
+  const d = await (await fetch("/api/detect/splits")).json();
+  const el = $("split-state");
+  if (!d.exists) { el.textContent = "还没有划分：先切片，再点「② 生成划分」。"; return; }
+  const ratio = (d.ratios || []).map(v => Math.round(v)).join(":");
+  const rows = ["train", "val", "test"].map(n => {
+    const w = (d.splits[n] || {}).windows || 0;
+    const seqs = (d[n] || []).join(", ");
+    return `${n}：${w} 窗　[${seqs || "空"}]`;
+  });
+  el.innerHTML = `划分模式 ${d.mode || "-"}　比例 ${ratio || "-"}<br>` + rows.join("<br>");
+}
+
+async function loadTrainSummary() {
+  const exp = ($("train-exp").value || "").trim() || "light_detector_v1";
+  const d = await (await fetch("/api/detect/train/history?experiment=" + encodeURIComponent(exp))).json();
+  const epochs = d.epochs || [];
+  const el = $("train-summary");
+  if (!epochs.length) { el.innerHTML = '<span class="hint">该实验还没有训练记录</span>'; return; }
+  const last = epochs[epochs.length - 1];
+  const best = epochs.reduce((a, b) => (b["val_mAP@0.5"] > a["val_mAP@0.5"] ? b : a), epochs[0]);
+  const rec = Object.entries(last.per_class_recall || {}).map(([k, v]) => `${k}=${v.toFixed(3)}`).join(" ");
+  el.innerHTML =
+    `<b>${exp}</b>　已训练 ${epochs.length} 轮　最近 val mAP@0.5=${last["val_mAP@0.5"].toFixed(3)}` +
+    `　最佳 ${best["val_mAP@0.5"].toFixed(3)}（第 ${best.epoch + 1} 轮）` +
+    `<br><span class="hint">最近每类召回：${rec}</span>`;
+}
+
+async function loadEvalResult() {
+  const split = $("eval-split").value;
+  const d = await (await fetch("/api/detect/eval/result?split=" + split)).json();
+  const el = $("eval-summary");
+  if (!d.exists) { el.innerHTML = '<span class="hint">该划分还没有评估结果</span>'; return; }
+  const ap = Object.entries(d.per_class_ap || {}).map(([k, v]) => `${k}=${v.toFixed(3)}`).join(" ");
+  const rec = Object.entries(d.per_class_recall || {}).map(([k, v]) => `${k}=${v.toFixed(3)}`).join(" ");
+  el.innerHTML = `<b>${split} 评估</b>　mAP@0.5=${(d.mAP["@0.5"] || 0).toFixed(3)}` +
+    `　mAP@0.75=${(d.mAP["@0.75"] || 0).toFixed(3)}<br>` +
+    `<span class="hint">每类 AP：${ap}<br>每类召回：${rec}</span>`;
+}
+
+$("btn-refresh-slices").onclick = () => loadDetectSequences();
+$("btn-slice").onclick = () => post("/api/slice", { overwrite: false });
+$("btn-split").onclick = () => {
+  const picked = seqChecked();
+  const ratios = $("split-ratios").value.trim();
+  if (!ratios) { toast("请先填划分比例"); return; }
+  post("/api/split", {
+    ratios, sequences: picked.length ? picked : "all",
+    seed: +$("split-seed").value || 0,
+    keep_zero_pedestrian: $("split-keep-noped").checked,
+  });
+};
+$("btn-train").onclick = () => post("/api/train", {
+  epochs: +$("train-epochs").value || null,
+  batch_size: +$("train-batch").value || null,
+  lr: parseFloat($("train-lr").value) || null,
+  experiment: ($("train-exp").value || "").trim(),
+});
+$("btn-resume-train").onclick = () => post("/api/train", {
+  epochs: +$("train-epochs").value || null,
+  batch_size: +$("train-batch").value || null,
+  lr: parseFloat($("train-lr").value) || null,
+  experiment: ($("train-exp").value || "").trim(),
+  resume: `runs/${($("train-exp").value || "light_detector_v1").trim()}/last.pth`,
+});
+$("btn-evaluate").onclick = () => post("/api/evaluate", {
+  split: $("eval-split").value,
+  experiment: ($("train-exp").value || "").trim() || "light_detector_v1",
+  use_best: true,
+});
+$("eval-split").onchange = () => loadEvalResult();
+
+// 任务跑完后刷新划分/训练摘要
+let lastStatus = "";
+setInterval(async () => {
+  const m = await (await fetch("/api/status")).json();
+  if (m.status === "done" && lastStatus !== "done") {
+    await loadSplitState();
+    await loadTrainSummary();
+  }
+  lastStatus = m.status;
+}, 5000);
+
+loadDetectSequences();
+loadSplitState();
+loadTrainSummary();
+
+// ---------- 序列浏览 ----------
+async function loadRigs() {
+  const d = await (await fetch("/api/rigs")).json();
+  $("rig").innerHTML = (d.rigs || []).map(r => `<option value="${r}">${r}</option>`).join("");
+}
+
+async function loadSequences() {
+  const ds = encodeURIComponent(datasetDir());
+  const d = await (await fetch(`/api/sequences?dataset=${ds}`)).json();
+  const keep = $("seq").value;
+  $("seq").innerHTML = (d.sequences || []).map(s =>
+    `<option value="${s.id}">${s.id}${s.town ? " · " + s.town : ""}${s.junction ? " 路口" + s.junction : ""}${s.weather_label ? " · " + s.weather_label : ""}${s.frames ? " · " + s.frames + "帧" : ""}</option>`
+  ).join("");
+  if (keep && (d.sequences || []).some(s => s.id === keep)) $("seq").value = keep;
+  loadCameras();
+}
+
+async function loadCameras() {
+  const seq = $("seq").value;
+  if (!seq) { $("cam").innerHTML = ""; showFrame(); return; }
+  const ds = encodeURIComponent(datasetDir());
+  const d = await (await fetch(`/api/seq/${seq}/cameras?dataset=${ds}`)).json();
+  state.hasSnapshot = !!d.has_snapshot;
+  $("btn-reproject").disabled = !state.hasSnapshot;
+  const keep = $("cam").value;
+  $("cam").innerHTML = (d.cameras || []).map(c =>
+    `<option value="${c.camera_id}">${c.camera_id}（${c.frames} 帧）</option>`).join("");
+  if (keep && (d.cameras || []).some(c => c.camera_id === keep)) $("cam").value = keep;
+  const frames = (d.cameras || []).find(c => c.camera_id === $("cam").value)?.frames || 0;
+  const slider = $("frame-slider");
+  slider.max = Math.max(0, frames - 1);
+  slider.value = Math.min(+slider.value, slider.max);
+  showFrame();
+}
+
+function drawBoxes(canvas, img, labels) {
+  const ctx = canvas.getContext("2d");
+  canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+  ctx.drawImage(img, 0, 0);
+  // 旧序列是 vehicle/walker 二分类，也给上色，浏览历史数据不至于全灰。
+  const COLORS = { car: "#ffa94d", motorcycle: "#f04fe0", pedestrian: "#51cf66",
+                   vehicle: "#ffa94d", walker: "#51cf66" };
+  const counts = {};
+  const draw = (a, ignored) => {
+    const [x, y, w, h] = a.bbox;
+    const color = ignored ? "#7a828c" : (COLORS[a.category] || "#ddd");
+    ctx.strokeStyle = color; ctx.lineWidth = Math.max(1.5, canvas.width / 640);
+    if (ignored) ctx.setLineDash([6, 4]);
+    ctx.strokeRect(x, y, w, h);
+    ctx.setLineDash([]);
+    const tag = a.category + (a.visibility != null ? " " + a.visibility.toFixed(2) : "")
+      + (a.difficult ? " 难" : "") + (a.truncated ? " 截" : "");
+    ctx.font = `${Math.max(11, canvas.width / 90)}px sans-serif`;
+    const tw = ctx.measureText(tag).width;
+    ctx.fillStyle = "rgba(0,0,0,.55)"; ctx.fillRect(x, Math.max(0, y - 16), tw + 8, 15);
+    ctx.fillStyle = color; ctx.fillText(tag, x + 4, Math.max(11, y - 4));
+  };
+  for (const a of labels.annotations || []) {
+    draw(a, a.ignore);
+    if (!a.ignore) counts[a.category] = (counts[a.category] || 0) + 1;
+  }
+  for (const a of labels.ignored_annotations || []) draw(a, true);
+  return counts;
+}
+
+async function showFrame() {
+  const seq = $("seq").value, cam = $("cam").value;
+  const n = +$("frame-slider").value;
+  $("frame-label").textContent = seq && cam ? `帧 ${n}` : "";
+  if (!seq || !cam) return;
+  const ds = encodeURIComponent(datasetDir());
+  const labels = await (await fetch(`/api/seq/${seq}/${cam}/labels/${n}?dataset=${ds}`)).json();
+  if (labels.error) { toast(labels.error); return; }
+  state.labels = labels;
+  const rgb = new Image();
+  rgb.src = `/api/seq/${seq}/${cam}/frame/${n}?dataset=${ds}`;
+  rgb.onload = () => {
+    const counts = drawBoxes($("viewer-rgb"), rgb, labels);
+    const parts = Object.entries(counts).map(([k, v]) => `${k}×${v}`);
+    const t = (labels.timestamp_us / 1e6).toFixed(2);
+    $("counts").textContent = `帧 ${n} · t=${t}s · 标注 ${parts.join("  ") || "无"} · 忽略 ${(labels.ignored_annotations || []).length} 个`;
+  };
+  const ev = new Image();
+  ev.src = `/api/seq/${seq}/${cam}/events/${n}?dataset=${ds}`;
+  ev.onerror = () => { $("counts-events").textContent = "事件帧不可用"; };
+  ev.onload = () => {
+    const c = $("viewer-events"), ctx = c.getContext("2d");
+    c.width = ev.naturalWidth; c.height = ev.naturalHeight;
+    ctx.drawImage(ev, 0, 0);
+    $("counts-events").textContent = `第 ${n} 帧窗口内的事件累积（分辨率 ${ev.naturalWidth}×${ev.naturalHeight}）`;
+  };
+}
+
+$("seq").onchange = loadCameras;
+$("cam").onchange = () => {
+  const slider = $("frame-slider");
+  slider.value = 0;
+  showFrame();
+};
+$("frame-slider").oninput = () => { $("frame-label").textContent = `帧 ${$("frame-slider").value}`; };
+$("frame-slider").onchange = showFrame;
+$("btn-prev").onclick = () => { const s = $("frame-slider"); if (+s.value > 0) { s.value = +s.value - 1; showFrame(); } };
+$("btn-next").onclick = () => { const s = $("frame-slider"); if (+s.value < +s.max) { s.value = +s.value + 1; showFrame(); } };
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
+  if (e.key === "ArrowLeft") $("btn-prev").click();
+  if (e.key === "ArrowRight") $("btn-next").click();
+});
+
+function toast(text) {
+  const el = $("toast");
+  el.textContent = text; el.style.display = "block";
+  clearTimeout(el._t); el._t = setTimeout(() => (el.style.display = "none"), 4000);
+}
+
+// ---------- 右侧实时日志面板 ----------
+$("btn-logpanel").onclick = () => {
+  const open = $("logpanel").classList.toggle("open");
+  $("btn-logpanel").classList.toggle("active", open);
+};
+$("btn-log-clear").onclick = () => { $("log-all").textContent = ""; };
+// 点击面板和按钮之外的空白处收起面板
+document.addEventListener("click", (e) => {
+  if (!$("logpanel").classList.contains("open")) return;
+  if (e.target.closest("#logpanel") || e.target.closest("#btn-logpanel")) return;
+  $("logpanel").classList.remove("open");
+  $("btn-logpanel").classList.remove("active");
+});
+
+// ---------- 启动 ----------
+connectEvents();
+loadRigs();
+loadSequences();
+pollCarla();
+setInterval(pollCarla, 3000);
+</script>
+</body>
+</html>

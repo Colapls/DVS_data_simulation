@@ -1,0 +1,81 @@
+town: Town10HD_Opt
+sequence_duration_s: 90.0
+fps: 20.0
+seed: null
+cameras:
+  cam_01:
+    location:
+    - 56.047
+    - 28.34
+    - 4.0
+    pitch: -15.565
+    yaw: 191.118
+    fov: 60.0
+    preset: road_day
+  cam_02:
+    location:
+    - 43.863
+    - 39.9
+    - 4.0
+    pitch: -15.468
+    yaw: 262.422
+    fov: 60.0
+    preset: road_day
+  cam_03:
+    location:
+    - 26.404
+    - 28.257
+    - 4.0
+    pitch: -14.221
+    yaw: 350.2
+    fov: 60.0
+    preset: road_day
+  cam_04:
+    location:
+    - 34.445
+    - 13.28
+    - 4.0
+    pitch: -15.519
+    yaw: 58.57
+    fov: 60.0
+    preset: road_day
+  cam_05:
+    location:
+    - 56.413
+    - 24.841
+    - 4.0
+    pitch: -15.448
+    yaw: 177.109
+    fov: 60.0
+    preset: road_day
+traffic:
+  vehicles: 80
+  walkers: 40
+  ignore_lights_pct:
+  - 0
+  - 30
+  speed_difference_pct:
+  - -10
+  - 20
+  following_distance_m:
+  - 2
+  - 6
+weather_cycle:
+- ClearNoon
+- CloudyNoon
+- SoftRainSunset
+- WetSunset
+- ClearNight
+- HardRainNight
+location:
+  map_name: Town10HD_Opt
+  junction_id: 841
+  junction_center_m:
+  - 41.957
+  - 25.571
+  - 0.0
+  aim: junction
+  geo:
+    latitude: 0.0002298
+    longitude: 0.0003771
+    altitude: 0.0

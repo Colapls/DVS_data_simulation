@@ -1,0 +1,46 @@
+town: Town03
+sequence_duration_s: 90
+fps: 40
+seed: null
+
+# 路口信息：机位就架在路口上，坐标与相机一致。
+# 没有这一段时采集器拿不到路口中心，行人只能退回全城随机撒点——
+# 那是旧版崩溃（exit 0xC00000FD）的根因所在。
+location:
+  map_name: Town03
+  junction_id: null
+  junction_center_m: [88.2, -12.5, 0.0]
+  geo: {latitude: -0.0001123, longitude: 0.0007926, altitude: 0.0}
+  aim: junction_center
+
+cameras:
+  cam_01:
+    location: [88.2, -12.5, 6.0]
+    pitch: -25
+    yaw: 180
+    fov: 60
+    preset: road_day
+  cam_02:
+    location: [88.2, -12.5, 6.0]
+    pitch: -40
+    yaw: 225
+    fov: 60
+    preset: road_day
+
+traffic:
+  vehicles: 80
+  walkers: 40
+  motorcycle_ratio: 0.3
+  pedestrian_spawn_radius_m: [30, 60]
+  pedestrian_walk_distance_m: [15, 40]
+  crosswalk_ratio: 0.4
+  ignore_lights_pct: [0, 30]
+  speed_difference_pct: [-10, 20]
+  following_distance_m: [2, 6]
+
+weather_cycle:
+  - ClearNoon
+  - CloudyNoon
+  - SoftRainSunset
+  - WetSunset
+  - ClearNight

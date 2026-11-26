@@ -1,0 +1,47 @@
+train 7800 窗 / val 1600 窗
+设备：cuda（NVIDIA GeForce RTX 3070）
+模型参数量：1.54 M
+超参：epochs=40 batch=16 lr=0.0005
+epoch   0 (214.3s) loss=2.9980 cls=0.755 reg=0.810 | val mAP@0.5=0.0063 mAP@0.75=0.0000
+    每类召回：car=0.026 motorcycle=0.005 pedestrian=0.004
+epoch   1 (200.6s) loss=2.2282 cls=0.461 reg=0.744 | val mAP@0.5=0.0317 mAP@0.75=0.0022
+    每类召回：car=0.069 motorcycle=0.100 pedestrian=0.075
+epoch   2 (220.0s) loss=1.9873 cls=0.377 reg=0.703 | val mAP@0.5=0.0543 mAP@0.75=0.0010
+    每类召回：car=0.180 motorcycle=0.146 pedestrian=0.115
+epoch   3 (224.4s) loss=1.8723 cls=0.340 reg=0.681 | val mAP@0.5=0.0883 mAP@0.75=0.0040
+    每类召回：car=0.177 motorcycle=0.132 pedestrian=0.091
+epoch   4 (222.0s) loss=1.7937 cls=0.311 reg=0.666 | val mAP@0.5=0.1311 mAP@0.75=0.0220
+    每类召回：car=0.227 motorcycle=0.180 pedestrian=0.090
+epoch   5 (222.0s) loss=1.7084 cls=0.283 reg=0.648 | val mAP@0.5=0.1401 mAP@0.75=0.0153
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\multiprocessing\queues.py", line 264, in _feed
+    obj = _ForkingPickler.dumps(obj)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\multiprocessing\reduction.py", line 51, in dumps
+    cls(buf, protocol).dump(obj)
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\site-packages\torch\multiprocessing\reductions.py", line 607, in reduce_storage
+    metadata = storage._share_filename_cpu_()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\site-packages\torch\storage.py", line 437, in wrapper
+    return fn(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\site-packages\torch\storage.py", line 516, in _share_filename_cpu_
+    return super()._share_filename_cpu_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Couldn't open shared file mapping: <torch_29448_806542532_316>, error code: <1455>
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\multiprocessing\queues.py", line 264, in _feed
+    obj = _ForkingPickler.dumps(obj)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\multiprocessing\reduction.py", line 51, in dumps
+    cls(buf, protocol).dump(obj)
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\site-packages\torch\multiprocessing\reductions.py", line 607, in reduce_storage
+    metadata = storage._share_filename_cpu_()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\site-packages\torch\storage.py", line 437, in wrapper
+    return fn(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ProgramData\miniconda3\envs\dvs\Lib\site-packages\torch\storage.py", line 516, in _share_filename_cpu_
+    return super()._share_filename_cpu_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Couldn't open shared file mapping: <torch_31516_2841005580_292>, error code: <1455>

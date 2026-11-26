@@ -1,0 +1,6 @@
+sequence_id,rig,repeat,attempt,status,junction_id,camera_count,frame_count,total_events,weather,started_at_local,elapsed_s
+sequence_000001,Town10HD_Opt_j023.yaml,1,1,成功,23,2,1800,271111892,CloudyNoon,2026-10-29T15:20:39.517516+08:00,886.4
+sequence_000002,Town10HD_Opt_j189.yaml,1,1,成功,189,2,1800,238093738,ClearNoon,2026-10-29T15:35:26.162867+08:00,1229.9
+sequence_000003,Town10HD_Opt_j468.yaml,1,1,成功,468,2,1800,421640952,CloudyNoon,2026-10-29T15:55:55.808538+08:00,837.9
+sequence_000004,Town10HD_Opt_j532.yaml,1,1,成功,532,2,1800,515130488,CloudyNoon,2026-10-29T16:09:53.748055+08:00,1095.3
+sequence_000005,Town10HD_Opt_j719.yaml,1,1,成功,719,2,1800,3906072552,ClearNight,2026-10-29T16:28:09.211350+08:00,1765.2

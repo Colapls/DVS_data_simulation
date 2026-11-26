@@ -1,0 +1,4 @@
+python .\collect_dvs.py --rig rigs\Town10HD_Opt\Town10HD_Opt_j134.yaml --load-town --output .\dvs_roadside_multicam --frames 200
+python .\collect_dvs.py --rig rigs\Town10HD_Opt\Town10HD_Opt_j664.yaml --load-town --output .\dvs_roadside_multicam --frames 200
+python .\collect_dvs.py --rig rigs\Town10HD_Opt\Town10HD_Opt_j841.yaml --load-town --output .\dvs_roadside_multicam --frames 200
+python .\collect_dvs.py --rig rigs\Town10HD_Opt\Town10HD_Opt_j895.yaml --load-town --output .\dvs_roadside_multicam --frames 200

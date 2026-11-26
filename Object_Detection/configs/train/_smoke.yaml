@@ -1,0 +1,37 @@
+experiment_name: light_v0
+seed: 42
+data:
+  split_file: data/tmpsplit/train.txt
+  val_split_file: data/tmpsplit/val.txt
+  grid_width: 640
+  grid_height: 360
+  num_time_channels: 9
+  class_names:
+  - car
+  - motorcycle
+  - pedestrian
+  class_weights:
+  - 1.0
+  - 1.5
+  - 2.0
+model:
+  width: 64
+train:
+  optimizer: adamw
+  lr: 0.0003
+  weight_decay: 0.0001
+  batch_size: 8
+  epochs: 8
+  lr_scheduler: cosine
+  workers: 4
+  force_cpu: false
+  augment:
+    temporal_jitter_ratio: 0.1
+    event_drop_ratio:
+    - 0.1
+    - 0.3
+    noise_scale: 1.0
+    geometry:
+    - hflip
+    - translate
+    - scale

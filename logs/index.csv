@@ -1,0 +1,2 @@
+run_id,started_at_local,ended_at_local,towns,rig_dir,rig_count,repeat,sequences,succeeded,failed,total_events,elapsed_s,log_dir
+20261029-152037,2026-10-29T15:20:37.758861+08:00,2026-10-29T16:57:33.273276+08:00,Town10HD_Opt,E:\Projects\DVS_data\rigs\Town10HD_Opt,5,1,5,5,0,5352049622,5815.5,E:\Projects\DVS_data\logs\20261029-152037_Town10HD_Opt

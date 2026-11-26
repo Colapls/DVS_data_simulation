@@ -1,0 +1,640 @@
+{
+  "town": "Town10HD_Opt",
+  "settings": {
+    "aim": "junction",
+    "fov": 60.0,
+    "preset": "road_day",
+    "mount_height_m": null,
+    "max_cameras_per_rig": 8
+  },
+  "pole_count": 20,
+  "rig_count": 4,
+  "rigs": [
+    {
+      "file": "Town10HD_Opt_j134.yaml",
+      "junction_id": 134,
+      "cameras": [
+        {
+          "camera_id": "cam_01",
+          "pole_id": "pole_001"
+        },
+        {
+          "camera_id": "cam_02",
+          "pole_id": "pole_002"
+        },
+        {
+          "camera_id": "cam_03",
+          "pole_id": "pole_003"
+        }
+      ]
+    },
+    {
+      "file": "Town10HD_Opt_j664.yaml",
+      "junction_id": 664,
+      "cameras": [
+        {
+          "camera_id": "cam_01",
+          "pole_id": "pole_004"
+        },
+        {
+          "camera_id": "cam_02",
+          "pole_id": "pole_005"
+        },
+        {
+          "camera_id": "cam_03",
+          "pole_id": "pole_006"
+        },
+        {
+          "camera_id": "cam_04",
+          "pole_id": "pole_007"
+        },
+        {
+          "camera_id": "cam_05",
+          "pole_id": "pole_008"
+        },
+        {
+          "camera_id": "cam_06",
+          "pole_id": "pole_009"
+        }
+      ]
+    },
+    {
+      "file": "Town10HD_Opt_j841.yaml",
+      "junction_id": 841,
+      "cameras": [
+        {
+          "camera_id": "cam_01",
+          "pole_id": "pole_010"
+        },
+        {
+          "camera_id": "cam_02",
+          "pole_id": "pole_011"
+        },
+        {
+          "camera_id": "cam_03",
+          "pole_id": "pole_012"
+        },
+        {
+          "camera_id": "cam_04",
+          "pole_id": "pole_013"
+        },
+        {
+          "camera_id": "cam_05",
+          "pole_id": "pole_014"
+        }
+      ]
+    },
+    {
+      "file": "Town10HD_Opt_j895.yaml",
+      "junction_id": 895,
+      "cameras": [
+        {
+          "camera_id": "cam_01",
+          "pole_id": "pole_015"
+        },
+        {
+          "camera_id": "cam_02",
+          "pole_id": "pole_016"
+        },
+        {
+          "camera_id": "cam_03",
+          "pole_id": "pole_017"
+        },
+        {
+          "camera_id": "cam_04",
+          "pole_id": "pole_018"
+        },
+        {
+          "camera_id": "cam_05",
+          "pole_id": "pole_019"
+        },
+        {
+          "camera_id": "cam_06",
+          "pole_id": "pole_020"
+        }
+      ]
+    }
+  ],
+  "poles": [
+    {
+      "pole_id": "pole_001",
+      "rig_file": "Town10HD_Opt_j134.yaml",
+      "camera_id": "cam_01",
+      "junction_id": 134,
+      "pole_xy_m": [
+        56.067,
+        66.32
+      ],
+      "mount_m": [
+        56.067,
+        66.32,
+        4.0
+      ],
+      "target_m": [
+        42.49,
+        62.893,
+        0.0
+      ],
+      "yaw": 194.167,
+      "pitch": -15.942,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_002",
+      "rig_file": "Town10HD_Opt_j134.yaml",
+      "camera_id": "cam_02",
+      "junction_id": 134,
+      "pole_xy_m": [
+        30.048,
+        69.787
+      ],
+      "mount_m": [
+        30.048,
+        69.787,
+        4.0
+      ],
+      "target_m": [
+        42.49,
+        62.893,
+        0.0
+      ],
+      "yaw": 331.008,
+      "pitch": -15.706,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_003",
+      "rig_file": "Town10HD_Opt_j134.yaml",
+      "camera_id": "cam_03",
+      "junction_id": 134,
+      "pole_xy_m": [
+        43.977,
+        48.549
+      ],
+      "mount_m": [
+        43.977,
+        48.549,
+        4.0
+      ],
+      "target_m": [
+        42.49,
+        62.893,
+        0.0
+      ],
+      "yaw": 95.918,
+      "pitch": -15.503,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_004",
+      "rig_file": "Town10HD_Opt_j664.yaml",
+      "camera_id": "cam_01",
+      "junction_id": 664,
+      "pole_xy_m": [
+        109.328,
+        78.963
+      ],
+      "mount_m": [
+        109.328,
+        78.963,
+        4.0
+      ],
+      "target_m": [
+        100.248,
+        68.089,
+        0.0
+      ],
+      "yaw": 230.138,
+      "pitch": -15.768,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_005",
+      "rig_file": "Town10HD_Opt_j664.yaml",
+      "camera_id": "cam_02",
+      "junction_id": 664,
+      "pole_xy_m": [
+        105.814,
+        80.939
+      ],
+      "mount_m": [
+        105.814,
+        80.939,
+        4.0
+      ],
+      "target_m": [
+        100.248,
+        68.089,
+        0.0
+      ],
+      "yaw": 246.58,
+      "pitch": -15.942,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_006",
+      "rig_file": "Town10HD_Opt_j664.yaml",
+      "camera_id": "cam_03",
+      "junction_id": 664,
+      "pole_xy_m": [
+        85.978,
+        69.858
+      ],
+      "mount_m": [
+        85.978,
+        69.858,
+        4.0
+      ],
+      "target_m": [
+        100.248,
+        68.089,
+        0.0
+      ],
+      "yaw": 352.931,
+      "pitch": -15.545,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_007",
+      "rig_file": "Town10HD_Opt_j664.yaml",
+      "camera_id": "cam_04",
+      "junction_id": 664,
+      "pole_xy_m": [
+        85.982,
+        66.358
+      ],
+      "mount_m": [
+        85.982,
+        66.358,
+        4.0
+      ],
+      "target_m": [
+        100.248,
+        68.089,
+        0.0
+      ],
+      "yaw": 6.915,
+      "pitch": -15.555,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_008",
+      "rig_file": "Town10HD_Opt_j664.yaml",
+      "camera_id": "cam_05",
+      "junction_id": 664,
+      "pole_xy_m": [
+        98.998,
+        53.909
+      ],
+      "mount_m": [
+        98.998,
+        53.909,
+        4.0
+      ],
+      "target_m": [
+        100.248,
+        68.089,
+        0.0
+      ],
+      "yaw": 84.963,
+      "pitch": -15.695,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_009",
+      "rig_file": "Town10HD_Opt_j664.yaml",
+      "camera_id": "cam_06",
+      "junction_id": 664,
+      "pole_xy_m": [
+        109.478,
+        56.963
+      ],
+      "mount_m": [
+        109.478,
+        56.963,
+        4.0
+      ],
+      "target_m": [
+        100.248,
+        68.089,
+        0.0
+      ],
+      "yaw": 129.678,
+      "pitch": -15.467,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_010",
+      "rig_file": "Town10HD_Opt_j841.yaml",
+      "camera_id": "cam_01",
+      "junction_id": 841,
+      "pole_xy_m": [
+        56.047,
+        28.34
+      ],
+      "mount_m": [
+        56.047,
+        28.34,
+        4.0
+      ],
+      "target_m": [
+        41.957,
+        25.571,
+        0.0
+      ],
+      "yaw": 191.118,
+      "pitch": -15.565,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_011",
+      "rig_file": "Town10HD_Opt_j841.yaml",
+      "camera_id": "cam_02",
+      "junction_id": 841,
+      "pole_xy_m": [
+        43.863,
+        39.9
+      ],
+      "mount_m": [
+        43.863,
+        39.9,
+        4.0
+      ],
+      "target_m": [
+        41.957,
+        25.571,
+        0.0
+      ],
+      "yaw": 262.422,
+      "pitch": -15.468,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_012",
+      "rig_file": "Town10HD_Opt_j841.yaml",
+      "camera_id": "cam_03",
+      "junction_id": 841,
+      "pole_xy_m": [
+        26.404,
+        28.257
+      ],
+      "mount_m": [
+        26.404,
+        28.257,
+        4.0
+      ],
+      "target_m": [
+        41.957,
+        25.571,
+        0.0
+      ],
+      "yaw": 350.2,
+      "pitch": -14.221,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_013",
+      "rig_file": "Town10HD_Opt_j841.yaml",
+      "camera_id": "cam_04",
+      "junction_id": 841,
+      "pole_xy_m": [
+        34.445,
+        13.28
+      ],
+      "mount_m": [
+        34.445,
+        13.28,
+        4.0
+      ],
+      "target_m": [
+        41.957,
+        25.571,
+        0.0
+      ],
+      "yaw": 58.57,
+      "pitch": -15.519,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_014",
+      "rig_file": "Town10HD_Opt_j841.yaml",
+      "camera_id": "cam_05",
+      "junction_id": 841,
+      "pole_xy_m": [
+        56.413,
+        24.841
+      ],
+      "mount_m": [
+        56.413,
+        24.841,
+        4.0
+      ],
+      "target_m": [
+        41.957,
+        25.571,
+        0.0
+      ],
+      "yaw": 177.109,
+      "pitch": -15.448,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_015",
+      "rig_file": "Town10HD_Opt_j895.yaml",
+      "camera_id": "cam_01",
+      "junction_id": 895,
+      "pole_xy_m": [
+        -28.636,
+        69.712
+      ],
+      "mount_m": [
+        -28.636,
+        69.712,
+        4.0
+      ],
+      "target_m": [
+        -42.685,
+        67.308,
+        0.0
+      ],
+      "yaw": 189.709,
+      "pitch": -15.677,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_016",
+      "rig_file": "Town10HD_Opt_j895.yaml",
+      "camera_id": "cam_02",
+      "junction_id": 895,
+      "pole_xy_m": [
+        -48.58,
+        80.645
+      ],
+      "mount_m": [
+        -48.58,
+        80.645,
+        4.0
+      ],
+      "target_m": [
+        -42.685,
+        67.308,
+        0.0
+      ],
+      "yaw": 293.846,
+      "pitch": -15.34,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_017",
+      "rig_file": "Town10HD_Opt_j895.yaml",
+      "camera_id": "cam_03",
+      "junction_id": 895,
+      "pole_xy_m": [
+        -52.085,
+        78.655
+      ],
+      "mount_m": [
+        -52.085,
+        78.655,
+        4.0
+      ],
+      "target_m": [
+        -42.685,
+        67.308,
+        0.0
+      ],
+      "yaw": 309.642,
+      "pitch": -15.188,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_018",
+      "rig_file": "Town10HD_Opt_j895.yaml",
+      "camera_id": "cam_04",
+      "junction_id": 895,
+      "pole_xy_m": [
+        -52.147,
+        56.655
+      ],
+      "mount_m": [
+        -52.147,
+        56.655,
+        4.0
+      ],
+      "target_m": [
+        -42.685,
+        67.308,
+        0.0
+      ],
+      "yaw": 48.388,
+      "pitch": -15.681,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_019",
+      "rig_file": "Town10HD_Opt_j895.yaml",
+      "camera_id": "cam_05",
+      "junction_id": 895,
+      "pole_xy_m": [
+        -41.658,
+        52.626
+      ],
+      "mount_m": [
+        -41.658,
+        52.626,
+        4.0
+      ],
+      "target_m": [
+        -42.685,
+        67.308,
+        0.0
+      ],
+      "yaw": 93.998,
+      "pitch": -15.204,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    },
+    {
+      "pole_id": "pole_020",
+      "rig_file": "Town10HD_Opt_j895.yaml",
+      "camera_id": "cam_06",
+      "junction_id": 895,
+      "pole_xy_m": [
+        -27.018,
+        66.214
+      ],
+      "mount_m": [
+        -27.018,
+        66.214,
+        4.0
+      ],
+      "target_m": [
+        -42.685,
+        67.308,
+        0.0
+      ],
+      "yaw": 176.004,
+      "pitch": -14.289,
+      "aim_source": "junction_center",
+      "near_road_m": 0.0,
+      "over_roadway": true,
+      "light_actor_ids": []
+    }
+  ]
+}

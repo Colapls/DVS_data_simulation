@@ -1,0 +1,21 @@
+# 事件切片配置：CARLA 采集产物 → 训练窗（体素网格）
+# 用法：python scripts/01_slice_events.py --config configs/data/slice_carla.yaml
+
+dataset_root: E:/Projects/DVS_data/dvs_roadside_multicam
+output_root: E:/Projects/DVS_data/Object_Detection/data/slices
+
+# ---- 窗参数 ----
+# 采集帧率 40fps（25ms/帧）或 20fps（50ms/帧）。50ms 窗在 40fps 下覆盖
+# 2 帧、在 20fps 下覆盖 1 帧；标注一律取窗末时刻（因果口径）。
+window_ms: 50
+overlap_ms: 25
+
+# ---- 体素网格 ----
+# 采集分辨率是 1280×720，方案 §4.4 允许显存吃紧时降采样 2 倍（记录在案）。
+grid_width: 640
+grid_height: 360
+# 时间通道数：1Mpx 官方口径，2×9=18 通道（前后段分别是 ON / OFF）
+num_time_channels: 9
+
+# 事件数低于此值的窗跳过（静止画面）
+min_events_per_window: 10

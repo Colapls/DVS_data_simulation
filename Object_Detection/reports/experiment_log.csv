@@ -1,0 +1,5 @@
+experiment_name,epochs,val_mAP@0.5,val_mAP@0.75,car_recall,motorcycle_recall,pedestrian_recall,params_M,device,note
+smoke,1,0.0,0.0,0.0,0.0,0.0,1.54,cuda,自建轻量检测器（体素网格 + FCOS 风格头）
+smoke,15,0.0,0.0,0.0,0.0,0.0,1.54,cuda,自建轻量检测器（体素网格 + FCOS 风格头）
+smoke,15,0.0,0.0,0.0,0.0,0.0,1.54,cuda,自建轻量检测器（体素网格 + FCOS 风格头）
+light_v0,8,0.0008,0.0003,0.0215,0.0012,0.012,1.54,cuda,自建轻量检测器（体素网格 + FCOS 风格头）
